@@ -8,6 +8,8 @@
     <title>Student Confirmation Page</title>
 </head>
 <body>
-The sudent is confirmed: ${student.firstName} ${student.lastName}
+<h3>
+The sudent is confirmed: ${student.firstName} ${student.lastName} ${student.country}
+</h3>
 </body>
 </html>
