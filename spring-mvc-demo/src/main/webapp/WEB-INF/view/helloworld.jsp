@@ -10,8 +10,10 @@ Hello World of Spring!
 <br><br>
 
 Student name: ${param.studentName}
+<br><br>
+Shout: ${message}
 <hr>
-<a href="./">Home page</a>
+<a href="../">Home page</a>
 
 </body>
 </html>
