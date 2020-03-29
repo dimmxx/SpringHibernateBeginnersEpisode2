@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Arrays;
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -21,6 +23,8 @@ public class StudentController {
     public String processForm(@ModelAttribute("student") Student theStudent){
         System.out.println("theStudent: " + theStudent.getFirstName() + " " + theStudent.getLastName());
         System.out.println(theStudent.getCountry());
+        System.out.println(Arrays.toString(theStudent.getOperatingSystem()));
+        System.out.println(Arrays.toString(theStudent.getFavoriteIde()));
         return "student-confirmation";
     }
 }
