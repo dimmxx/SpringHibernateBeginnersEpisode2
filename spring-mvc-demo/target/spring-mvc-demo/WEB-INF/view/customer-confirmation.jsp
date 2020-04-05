@@ -15,7 +15,8 @@
 
 First name: ${customer.firstName}
 <br> Last name: ${customer.lastName}
-
+<br> Free passes: ${customer.freePasses}
+<br> Free passes: ${customer.postalCode}
 
 <hr>
 <a href="../">Home page</a>
