@@ -5,7 +5,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class ReadStudentDemo {
+import java.util.List;
+
+public class QueryStudentDemo {
 
     public static void main(String[] args) {
 
@@ -13,32 +15,21 @@ public class ReadStudentDemo {
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Student.class)
                 .buildSessionFactory();
-
         Session session = factory.getCurrentSession();
 
         try {
-
-            Student student = new Student("Daffy", "Duck", "paul@gmail.com");
             session.beginTransaction();
-            System.out.println("Saving the student...");
-            System.out.println(student);
-            session.save(student);
+            List<Student> list = session.createQuery("from Student").list();
+            list.forEach(System.out::println);
+
+            System.out.println();
+            list = session.createQuery("from Student s where s.lastName = 'Duck'").list();
+            list.forEach(System.out::println);
+            
             session.getTransaction().commit();
             System.out.println("Done!");
-            System.out.println(student);
-
-
-            session = factory.getCurrentSession();
-            session.beginTransaction();
-            Student studentFromDb = session.get(Student.class, student.getId());
-            System.out.println(studentFromDb);
-
         } finally {
             factory.close();
         }
     }
 }
-
-
-
-
