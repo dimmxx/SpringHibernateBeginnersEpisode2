@@ -2,8 +2,8 @@ package com.luv2code.entity;
 
 import javax.persistence.*;
 
-//@Entity
-@Table(name = "student")
+@Entity
+@Table(name = "instructor")
 public class Instructor {
 
     @Id
@@ -65,13 +65,22 @@ public class Instructor {
         this.email = email;
     }
 
+    public InstructorDetail getInstructorDetail() {
+        return instructorDetail;
+    }
+
+    public void setInstructorDetail(InstructorDetail instructorDetail) {
+        this.instructorDetail = instructorDetail;
+    }
+
     @Override
     public String toString() {
-        return "Student{" +
+        return "Instructor{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", instructorDetail=" + instructorDetail +
                 '}';
     }
 }
