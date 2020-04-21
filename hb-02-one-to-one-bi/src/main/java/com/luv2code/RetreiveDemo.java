@@ -16,17 +16,21 @@ public class RetreiveDemo {
                 .addAnnotatedClass(InstructorDetail.class)
                 .buildSessionFactory();
 
-        long instructorDetailId = 9;
+        long instructorDetailId = 999;
+
         Session session = factory.getCurrentSession();
 
         try {
             session.beginTransaction();
             InstructorDetail instructorDetail = session.get(InstructorDetail.class, instructorDetailId);
-            System.out.println(">>> found instructor: " + instructorDetail);
-            System.out.println(">>> deleting instructor: " + instructorDetail);
+            System.out.println(instructorDetail);
+            System.out.println(instructorDetail.getInstructor());
 
             session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
         } finally {
+            session.close();
             factory.close();
         }
     }
