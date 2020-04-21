@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateDemo {
+public class RetreiveDemo {
 
     public static void main(String[] args) {
 
@@ -16,21 +16,14 @@ public class CreateDemo {
                 .addAnnotatedClass(InstructorDetail.class)
                 .buildSessionFactory();
 
+        long instructorDetailId = 9;
         Session session = factory.getCurrentSession();
 
         try {
-
-            Instructor instructor
-                    = new Instructor("Chad", "Darby", "chad@mail.com");
-            InstructorDetail instructorDetail
-                    = new InstructorDetail("love2cod/youtube.com",
-                    "love2code");
-
-            instructor.setInstructorDetail(instructorDetail);
-
             session.beginTransaction();
-
-            session.save(instructor);
+            InstructorDetail instructorDetail = session.get(InstructorDetail.class, instructorDetailId);
+            System.out.println(">>> found instructor: " + instructorDetail);
+            System.out.println(">>> deleting instructor: " + instructorDetail);
 
             session.getTransaction().commit();
         } finally {
