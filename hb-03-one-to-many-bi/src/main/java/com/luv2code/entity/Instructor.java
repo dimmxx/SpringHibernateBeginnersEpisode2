@@ -47,11 +47,6 @@ public class Instructor {
         course.setInstructor(this);
     }
 
-
-
-
-
-
     public long getId() {
         return id;
     }

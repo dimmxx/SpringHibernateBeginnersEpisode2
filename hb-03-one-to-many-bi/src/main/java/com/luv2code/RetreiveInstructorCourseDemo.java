@@ -1,12 +1,13 @@
 package com.luv2code;
 
+import com.luv2code.entity.Course;
 import com.luv2code.entity.Instructor;
 import com.luv2code.entity.InstructorDetail;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class RetreiveDemo {
+public class RetreiveInstructorCourseDemo {
 
     public static void main(String[] args) {
 
@@ -14,19 +15,23 @@ public class RetreiveDemo {
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
+                .addAnnotatedClass(Course.class)
                 .buildSessionFactory();
-
-        long instructorDetailId = 999;
 
         Session session = factory.getCurrentSession();
 
+        long id = 1;
+
         try {
             session.beginTransaction();
-            InstructorDetail instructorDetail = session.get(InstructorDetail.class, instructorDetailId);
-            System.out.println(instructorDetail);
-            System.out.println(instructorDetail.getInstructor());
+            Instructor instructor = session.get(Instructor.class, id);
+
+            System.out.println(instructor);
+            System.out.println(instructor.getCourses());
+            System.out.println(instructor.getInstructorDetail());
 
             session.getTransaction().commit();
+
         }catch (Exception e){
             e.printStackTrace();
         } finally {
