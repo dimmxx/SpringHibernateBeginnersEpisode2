@@ -26,8 +26,8 @@ public class CreateCourseDemo {
             session.beginTransaction();
             Instructor instructor = session.get(Instructor.class, id);
 
-            Course course1 = new Course("Air Guitar - The Ultimate Guide");
-            Course course2 = new Course("The Pinball Masterclass");
+            Course course1 = new Course("Drums - The Ultimate Guide");
+            Course course2 = new Course("The Football Masterclass");
 
             instructor.addCourse(course1);
             instructor.addCourse(course2);

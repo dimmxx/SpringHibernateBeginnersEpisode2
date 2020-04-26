@@ -20,18 +20,20 @@ public class EagerLazyDemo {
 
         Session session = factory.getCurrentSession();
 
-        long id = 1;
-
         try {
+            long id = 1;
+
             session.beginTransaction();
             Instructor instructor = session.get(Instructor.class, id);
 
-            System.out.println(instructor);
-            System.out.println(instructor.getCourses());
-            System.out.println(instructor.getInstructorDetail());
+            System.out.println(">>>" + instructor);
+
+            System.out.println(">>>" + instructor.getCourses());
+            System.out.println(">>>" + instructor.getInstructorDetail());
+
+
 
             session.getTransaction().commit();
-
         }catch (Exception e){
             e.printStackTrace();
         } finally {
