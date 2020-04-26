@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class EagerLazyDemo {
+public class CreateCourseDemo {
 
     public static void main(String[] args) {
 
@@ -20,31 +20,21 @@ public class EagerLazyDemo {
 
         Session session = factory.getCurrentSession();
 
-
-        //How to avoid LazyInitializationException
-        // 1. get instructor.getCourses() inside the session
-        // 2. hibernate query with HQL (see FetchJoinDemo.java)
+        long id = 1;
 
         try {
-            long id = 1;
-
             session.beginTransaction();
             Instructor instructor = session.get(Instructor.class, id);
 
-            System.out.println(">>>" + instructor);
-            instructor.getCourses();
+            Course course1 = new Course("Drums - The Ultimate Guide");
+            Course course2 = new Course("The Football Masterclass");
+
+            instructor.addCourse(course1);
+            instructor.addCourse(course2);
+
+            session.save(course1);
+            session.save(course2);
             session.getTransaction().commit();
-
-
-            session.close();
-
-            System.out.println(">>>");
-
-
-            System.out.println(">>>" + instructor.getInstructorDetail());
-
-
-
 
         }catch (Exception e){
             e.printStackTrace();
