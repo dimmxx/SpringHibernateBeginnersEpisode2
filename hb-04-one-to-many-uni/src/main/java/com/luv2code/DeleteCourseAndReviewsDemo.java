@@ -3,12 +3,12 @@ package com.luv2code;
 import com.luv2code.entity.Course;
 import com.luv2code.entity.Instructor;
 import com.luv2code.entity.InstructorDetail;
+import com.luv2code.entity.Review;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 
-public class FetchJoinDemo {
+public class DeleteCourseAndReviewsDemo {
 
     public static void main(String[] args) {
 
@@ -17,34 +17,21 @@ public class FetchJoinDemo {
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(Review.class)
                 .buildSessionFactory();
-
         Session session = factory.getCurrentSession();
-        long id = 1;
-
-        //How to avoid LazyInitializationException
-        // 1. get instructor.getCourses() inside the session
-        // 2. hibernate query with HQL (see FetchJoinDemo.java)
 
         try {
             session.beginTransaction();
 
-            Query<Instructor> query =
-                    session.createQuery("select i from Instructor i "
-                                    + "join fetch i.courses "
-                                    + "where i.id=:instructorId",
-                            Instructor.class);
-            query.setParameter("instructorId", id);
+           long id = 10;
+           Course course = session.get(Course.class, id);
+           System.out.println(course.getReviews());
 
-            Instructor instructor = query.getSingleResult();
+           session.delete(course);
+
 
             session.getTransaction().commit();
-            session.close();
-
-            System.out.println(instructor);
-            System.out.println(instructor.getCourses());
-
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
