@@ -7,10 +7,7 @@ import com.luv2code.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,15 +39,15 @@ public class CustomerController {
     }
 
     @GetMapping ("/showFormForUpdate")
-    public String updateCustomer(Model model){
+    public String showFormForUpdate(@RequestParam("customerId") int customerId, Model model){
 
-        model.getAttribute("customerId");
+        //Customer customer = customerService.getCustomerById(customerId);
 
-        Customer customer =
+        Customer customer = list.stream().filter(c -> c.getId() == customerId).findFirst().get();
 
 
-        Customer theCustomer = new Customer();
-        model.addAttribute("customer", theCustomer);
+
+        model.addAttribute("customer", customer);
         return "customer-form";
     }
 

@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -30,4 +31,15 @@ public class CustomerDAOImpl implements CustomerDAO{
         Session session = sessionFactory.getCurrentSession();
         session.save(theCustomer);
     }
+
+    @Override
+    @Transactional
+    public Customer getCustomerById(@Param("id") int customerId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Customer> query = session.createQuery("from Customer where Customer.id = :id", Customer.class);
+        return query.getSingleResult();
+    }
+
+
+
 }
