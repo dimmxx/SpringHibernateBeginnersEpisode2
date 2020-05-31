@@ -40,19 +40,8 @@ public class CustomerController {
 
     @GetMapping ("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("customerId") int customerId, Model model){
-
-        //Customer customer = customerService.getCustomerById(customerId);
-
-        Customer customer = list.stream().filter(c -> c.getId() == customerId).findFirst().get();
-
-
-
-        model.addAttribute("customer", customer);
+        Customer theCustomer = customerService.getCustomerById(customerId);
+        model.addAttribute("customer", theCustomer);
         return "customer-form";
     }
-
-
-
-
-
 }
