@@ -18,7 +18,6 @@ public class AfterReturningDemoApp {
         System.out.println(accounts);
         System.out.println("\n");
 
-
         context.close();
     }
 
