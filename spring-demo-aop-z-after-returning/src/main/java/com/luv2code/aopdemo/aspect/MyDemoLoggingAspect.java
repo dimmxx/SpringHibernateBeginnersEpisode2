@@ -34,5 +34,16 @@ public class MyDemoLoggingAspect {
         String method = joinPoint.getSignature().toShortString();
         System.out.print("\n===>>>Executing @AfterReturning on method: " + method);
         System.out.print("\n===>>>Executing @AfterReturning. Result: " + result);
+
+        convertAccountsNamesToUpperCase(result);
+
+        System.out.print("\n===>>>Executing @AfterReturning. Modified result: " + result);
+
+    }
+
+    private void convertAccountsNamesToUpperCase(List<Account> result) {
+        for(Account account : result){
+            account.setName(account.getName().toUpperCase());
+        }
     }
 }
