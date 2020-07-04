@@ -9,24 +9,39 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @Aspect
 @Component
 @Order(1)
 public class MyDemoLoggingAspect {
 
+    private Logger logger = Logger.getLogger(MyDemoLoggingAspect.class.getName());
+
     @Around("execution(* com.luv2code.aopdemo.service.TrafficFortuneService.getFortune(..))")
     public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         String method = proceedingJoinPoint.getSignature().toShortString();
-        System.out.println("\n====>>>> Executing @Around on method: " + method);
+        logger.info("\n====>>>> Executing @Around on method: " + method);
 
         long begin = System.currentTimeMillis();
-        System.out.println("===>>>> begin " + begin);
+        logger.info("===>>>> begin " + begin);
         Object result = null;
-        result = proceedingJoinPoint.proceed();
+
+        try {
+            result = proceedingJoinPoint.proceed();
+        }catch (RuntimeException e){
+            //e.printStackTrace();
+            logger.warning(e.getMessage());
+            //result = "Major accident! But no worries!";
+
+            throw e;
+
+        }
+
         long end = System.currentTimeMillis();
-        System.out.println("===>>>> end   " + end);
+        logger.info("===>>>> end   " + end);
         long duration = end - begin;
-        System.out.println("\n====>>>> Duration: " + duration);
+        logger.info("\n====>>>> Duration: " + duration);
 
         return result;
     }
