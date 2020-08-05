@@ -9,7 +9,7 @@
 
 <body>
 <h3>Custom Login Page</h3>
-<form:form action="${pageContext.request.contextPath}/authenticateTheUSer" method="post">
+<form:form action="${pageContext.request.contextPath}/authenticateTheUser" method="post">
     <p>
         User name: <input type="text" name="username">
     </p>
