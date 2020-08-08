@@ -9,7 +9,7 @@
 
     <style>
         .failed{
-            color: red;
+            color: #ff0000;
         }
     </style>
 
