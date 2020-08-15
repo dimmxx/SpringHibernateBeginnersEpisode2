@@ -17,11 +17,17 @@
 <p>
     Role: <security:authentication property="principal.authorities" />
 </p>
-
-
+<hr>
+<p>
+    <a href="${pageContext.request.contextPath}/managers">Managers' secret page</a>
+</p>
 
 <hr>
+<p>
+    <a href="${pageContext.request.contextPath}/admins">Administrators' secret page</a>
+</p>
 
+<hr>
 <form:form action="${pageContext.request.contextPath}/logout" method="post">
     <input type="submit" value="Logout">
 </form:form>
