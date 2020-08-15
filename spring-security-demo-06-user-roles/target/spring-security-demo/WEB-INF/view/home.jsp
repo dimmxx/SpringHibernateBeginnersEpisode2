@@ -5,7 +5,7 @@
 <head>
     <title>luv2code Company Home Page</title>
 </head>
-
+<body>
 <h2>luv2code Company Home Page</h2>
 <hr>
 <p>Welcome to luv2code Company Home Page!</p>
@@ -18,16 +18,19 @@
     Role: <security:authentication property="principal.authorities" />
 </p>
 <hr>
-<p>
-    <a href="${pageContext.request.contextPath}/managers">Managers' secret page</a>
-</p>
+<security:authorize access="hasRole('MANAGER')">
+    <p>
+        <a href="${pageContext.request.contextPath}/managers">Managers' secret page</a>
+    </p>
+    <hr>
+</security:authorize>
 
-<hr>
-<p>
-    <a href="${pageContext.request.contextPath}/admins">Administrators' secret page</a>
-</p>
-
-<hr>
+<security:authorize access="hasRole('ADMIN')">
+    <p>
+        <a href="${pageContext.request.contextPath}/admins">Administrators' secret page</a>
+    </p>
+    <hr>
+</security:authorize>
 <form:form action="${pageContext.request.contextPath}/logout" method="post">
     <input type="submit" value="Logout">
 </form:form>
