@@ -1,0 +1,14 @@
+{
+  "id" : 10,
+  "firstName" : "John",
+  "lastName" : "Peterson",
+  "active" : false,
+  "address" : {
+    "street" : "100 Main St",
+    "city" : "Kyiv",
+    "state" : "State",
+    "zip" : 11,
+    "country" : "Country"
+  },
+  "languages" : [ "English", "Russian" ]
+}
