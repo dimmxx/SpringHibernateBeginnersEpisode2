@@ -1,15 +1,17 @@
 package com.luv2code.rest;
 
 import com.luv2code.domain.Student;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.luv2code.rest.error.StudentErrorResponse;
+import com.luv2code.rest.error.StudentNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 @RestController
 @RequestMapping("/api")
@@ -18,7 +20,7 @@ public class StudentRestController {
     private List<Student> students;
 
     @PostConstruct
-    private void loadData(){
+    private void loadData() {
         Student student1 = new Student("Dima", "Borysov");
         Student student2 = new Student("Olia", "Borysova");
         Student student3 = new Student("John", "Petrson");
@@ -29,16 +31,36 @@ public class StudentRestController {
     }
 
     @GetMapping("/students")
-    public List<Student> getStudents(){
+    public List<Student> getStudents() {
         return students;
     }
 
     @GetMapping("/students/{studentId}")
-    public Student getStudentById(@PathVariable int studentId){
+    public Student getStudentById(@PathVariable int studentId) {
+        if (studentId >= students.size() || studentId < 0) {
+            throw new StudentNotFoundException(String.format("Student with id %d not found", studentId));
+        }
         return students.get(studentId);
     }
 
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e){
+        StudentErrorResponse errorResponse = new StudentErrorResponse();
+        errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
+        errorResponse.setMessage(e.getMessage());
+        errorResponse.setTimeStamp(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception e){
+        StudentErrorResponse errorResponse = new StudentErrorResponse();
+        errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setMessage(e.getMessage());
+        errorResponse.setTimeStamp(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+
+    }
 
 
 }
