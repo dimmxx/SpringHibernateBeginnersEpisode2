@@ -31,20 +31,4 @@ public class StudentRestExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
