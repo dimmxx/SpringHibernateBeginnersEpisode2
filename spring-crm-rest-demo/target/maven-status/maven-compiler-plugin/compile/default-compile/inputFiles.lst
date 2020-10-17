@@ -1,0 +1,8 @@
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/service/CustomerServiceImpl.java
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/entity/Customer.java
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/rest/CustomerController.java
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/dao/CustomerDAO.java
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/dao/CustomerDAOImpl.java
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/config/DemoAppConfig.java
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/config/MySpringMvcDispatcherServletInitializer.java
+/home/dima/JavaProjects/SpringHibernateBeginnersEpisode2/spring-crm-rest-demo/src/main/java/com/luv2code/springdemo/service/CustomerService.java
