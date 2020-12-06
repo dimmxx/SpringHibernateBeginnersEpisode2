@@ -7,6 +7,12 @@ import java.util.Optional;
 
 public interface EmployeeDAO {
 
-    public Optional<List<Employee>> findAll();
+    Optional<List<Employee>> findAll();
+
+    Optional<Employee> findById(Long id);
+
+    Employee save(Employee employee);
+
+    void deleteById(Long id);
 
 }
