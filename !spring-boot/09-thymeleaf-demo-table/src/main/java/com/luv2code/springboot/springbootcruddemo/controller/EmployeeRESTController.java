@@ -1,4 +1,4 @@
-package com.luv2code.springboot.springbootcruddemo.rest;
+package com.luv2code.springboot.springbootcruddemo.controller;
 
 import com.luv2code.springboot.springbootcruddemo.entity.Employee;
 import com.luv2code.springboot.springbootcruddemo.service.EmployeeService;
@@ -9,12 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class EmployeeRestController {
+public class EmployeeRESTController {
 
     private final EmployeeService employeeService;
 
     @Autowired
-    public EmployeeRestController(EmployeeService employeeService) {
+    public EmployeeRESTController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
@@ -28,14 +28,13 @@ public class EmployeeRestController {
         return employeeService.findById(employeeId);
     }
 
-    @PostMapping("/employees/")
+    @PostMapping("/employees")
     public Employee save(@RequestBody Employee employee) {
         employee.setId(null);
-        //employee.
         return employeeService.save(employee);
     }
 
-    @PutMapping("/employees/")
+    @PutMapping("/employees")
     public Employee update(@RequestBody Employee employee) {
         return employeeService.save(employee);
     }
